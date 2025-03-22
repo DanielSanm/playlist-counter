@@ -1,6 +1,5 @@
-require('dotenv').config()
 
-const API_KEY = process.env.API_KEY
+const API_KEY = 'your_api_key'
 const PLAYLIST_ID = new URLSearchParams(window.location.search).get('list')
 
 let stats
@@ -25,8 +24,9 @@ async function getAllPlaylistItems() {
 
     } while (nextPageToken)
 
-    stats = document.querySelector('.metadata-stats')
-    stats.insertAdjacentHTML('afterbegin', '<span id="pcext-wait-text">calculating...</span>')
+    // stats = document.querySelector('.metadata-stats')
+    stats = document.querySelectorAll('.yt-content-metadata-view-model-wiz__metadata-row')[3]
+    stats.insertAdjacentHTML('afterbegin', '<span id="pcext-wait-text" style="font-size: 1.2rem; margin-right: 4px;">calculating...</span>')
 
     return allItems
 
@@ -100,7 +100,7 @@ function attachTotalDuration(total) {
     }
 
     document.querySelector('#pcext-wait-text').remove()
-    stats.insertAdjacentHTML('afterbegin', `<span id="pcext-total-duration">${finalDurattion} • </span>`)
+    stats.insertAdjacentHTML('afterbegin', `<span id="pcext-total-duration" style="font-size: 1.2rem; margin-right: 2px;">(${finalDurattion})</span>`)
 
 }
 
